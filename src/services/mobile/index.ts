@@ -4,7 +4,9 @@ import {
 } from "@/services/mobile/index.types";
 import { Api, Method } from "@/services/api";
 
-export const getVendorsList = async (params: GetVendersListApiRequest) => {
+export const getVendorsList = async (
+  params: GetVendersListApiRequest
+): Promise<GetVendersListApiResponse> => {
   return (
     await Api<GetVendersListApiResponse>({
       method: Method.GET,
