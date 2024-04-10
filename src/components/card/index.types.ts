@@ -5,8 +5,8 @@ export interface  CardProps {
     logo:string,
     is_pro:boolean,
     deliveryFee:number,
-    best_coupon:string,
+    best_coupon?:string,
     backgroundImage:string
-    discountValueForView:number,
+    discountValueForView?:number,
     isZFExpress:boolean,
 }
