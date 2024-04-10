@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SvgProps } from "@/components/types/index.types";
+import { SvgProps } from "@/components/common/types/index.types";
 
 export default function ProIcon(props: SvgProps) {
   const { color, height, width } = props;

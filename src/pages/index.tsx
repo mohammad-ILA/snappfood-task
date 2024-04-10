@@ -3,8 +3,8 @@ import { GetVendersListApiRequest } from "@/services/mobile/index.types";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "@/components/home/index.module.sass";
-import useApiCall from "@/components/hooks/use-api-call";
-import Card from "@/components/card";
+import useApiCall from "@/components/common/hooks/use-api-call";
+import Card from "@/components/common/card";
 export default function Home() {
   const [param, setParam] = useState<GetVendersListApiRequest>({
     lat: 35.754,
@@ -18,7 +18,7 @@ export default function Home() {
   useEffect(() => {
     fetchData(param);
   }, [param]);
-  
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
