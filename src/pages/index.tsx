@@ -34,10 +34,12 @@ export default function Home() {
           سوپرمارکت‌ها،‌ نانوایی‌ها و ...
         </title>
       </Head>
+      <section className={styles['cards-section']}>
       {data?.data.finalResult.map(
         (result, index) =>
           index !== 0 && <Card key={result.data.id} {...result.data} />
       )}
+      </section>
     </main>
   );
 }
