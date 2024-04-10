@@ -1,24 +1,23 @@
 import { CardProps } from "./index.types";
 import styles from "./index.module.sass";
 import Image from "next/image";
-export default function Card(props: CardProps) {
-  const {
-    backgroundImage,
-    best_coupon,
-    deliveryFee,
-    discountValueForView,
-    isZFExpress,
-    is_pro,
-    logo,
-    rate,
-    title,
-    voteCount,
-  } = props;
+const Card: React.FC<CardProps> = ({
+  backgroundImage,
+  best_coupon,
+  deliveryFee,
+  discountValueForView,
+  isZFExpress,
+  is_pro,
+  logo,
+  rate,
+  title,
+  voteCount,
+}) => {
   return (
     <section className={styles.card}>
       <header className={styles.card__header}>
         <div className={styles.card__image}>
-          <Image loader={({ src }) => src} src={backgroundImage} alt="" />
+          <Image loader={({ src }) => src} fill src={backgroundImage} alt="" />
         </div>
         <div
           className={
@@ -75,4 +74,6 @@ export default function Card(props: CardProps) {
       </div>
     </section>
   );
-}
+};
+
+export default Card;
