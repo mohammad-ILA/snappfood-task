@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import styles from "@/components/home/index.module.sass";
 import useApiCall from "@/components/common/hooks/use-api-call";
 import Card from "@/components/common/card";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { addVendors } from "@/redux/vendors-slice";
 export default function Home() {
+  const dispatch = useAppDispatch();
+  const vendors = useAppSelector((state) => state.vendors.vendors);
   const [param, setParam] = useState<GetVendersListApiRequest>({
     lat: 35.754,
     long: 51.328,
@@ -18,6 +22,17 @@ export default function Home() {
   useEffect(() => {
     fetchData(param);
   }, [param]);
+
+  useEffect(() => {
+    if (data)
+      dispatch(
+        addVendors(
+          data.data.finalResult
+            .filter((v, index) => index !== 0)
+            .map((vendor) => vendor.data)
+        )
+      );
+  }, [data]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -34,11 +49,10 @@ export default function Home() {
           سوپرمارکت‌ها،‌ نانوایی‌ها و ...
         </title>
       </Head>
-      <section className={styles['cards-section']}>
-      {data?.data.finalResult.map(
-        (result, index) =>
-          index !== 0 && <Card key={result.data.id} {...result.data} />
-      )}
+      <section className={styles["cards-section"]}>
+        {vendors.map(
+          (vendor, index) => index !== 0 && <Card key={vendor.id} {...vendor} />
+        )}
       </section>
     </main>
   );
