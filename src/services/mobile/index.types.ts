@@ -92,7 +92,7 @@ interface CuisinesArrayType {
   id: number;
   title: string;
 }
-interface FinalResultDataType {
+export interface FinalResultDataType {
   id: number;
   vendorCode: string;
   noOrder: boolean;
