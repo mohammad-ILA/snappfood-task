@@ -1,10 +1,10 @@
 import { CardProps } from "./index.types";
 import styles from "./index.module.sass";
-import Image from "next/image";
 import ProIcon from "../icons/pro";
 import variables from "@/components/common/styles/variables.module.sass";
 import StarIcon from "../icons/star";
 import { convertEnNumToFa } from "../functions/convert-en-num-to-fa";
+import Image from "@/components/common/image";
 const Card: React.FC<CardProps> = ({
   backgroundImage,
   best_coupon,
