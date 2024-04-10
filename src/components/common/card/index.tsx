@@ -4,6 +4,7 @@ import Image from "next/image";
 import ProIcon from "../icons/pro";
 import variables from "@/components/common/styles/variables.module.sass";
 import StarIcon from "../icons/star";
+import { convertEnNumToFa } from "../functions/convert-en-num-to-fa";
 const Card: React.FC<CardProps> = ({
   backgroundImage,
   best_coupon,
@@ -57,7 +58,9 @@ const Card: React.FC<CardProps> = ({
             <div className={styles["card__offer-icon"]}>
               <ProIcon width="21" height="21" color={variables.primaryColor} />
             </div>
-            <div className={styles["card__offer-text"]}>{best_coupon}</div>
+            <div className={styles["card__offer-text"]}>
+              {convertEnNumToFa(best_coupon)}
+            </div>
           </div>
         )}
       </header>
@@ -65,16 +68,20 @@ const Card: React.FC<CardProps> = ({
         <div className={styles["card__title-rate"]}>
           <div className={styles.card__title}>
             <h3 className={styles["card__title-text"]}>{title}</h3>
-            <div className={styles["card__title-discount"]}>
-              تا {discountValueForView}٪
-            </div>
+            {discountValueForView !== undefined && discountValueForView > 0 && (
+              <div className={styles["card__title-discount"]}>
+                تا {convertEnNumToFa(discountValueForView + "")}٪
+              </div>
+            )}
           </div>
           <div className={styles.card__rate}>
             <div className={styles["card__rate-count"]}>
-              ({voteCount.toLocaleString()})
+              ({convertEnNumToFa(voteCount.toLocaleString())})
             </div>
             <div className={styles["card__rate-score"]}>
-              <div className={styles["card__rate-score-text"]}>{rate}</div>
+              <div className={styles["card__rate-score-text"]}>
+                {convertEnNumToFa(rate.toString())}
+              </div>
               <div className={styles["card__rate-score-icon"]}>
                 <StarIcon
                   width="14"
@@ -94,7 +101,8 @@ const Card: React.FC<CardProps> = ({
             <div className={styles["card__send-price"]}>
               {deliveryFee === 0
                 ? "رایگان"
-                : deliveryFee.toLocaleString() + " تومان"}{" "}
+                : convertEnNumToFa(deliveryFee.toLocaleString()) +
+                  " تومان"}{" "}
             </div>
           </div>
           <div className={styles.card__duration}>
