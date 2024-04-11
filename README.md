@@ -26,7 +26,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Project Structure
 
-In **src/components** there are two folders. One named common and the other named home. In common folder there are all common components, hooks, functions, common assets like images, fonts, icons, styles and whatever use in the entire of the app. on the other and in the home folder or any other folder here except common represent the styles and assets special to a page. So home folder point to styles and assets and components that are special to home page in the pages folder.
+In **src/components** there are two folders.
+One named common and the other named home. In common folder there are all common components, hooks, functions, common assets like images, fonts, icons, styles and whatever use in the entire of the app.
+On the other and in the home folder or any other folder here except common represent the styles and assets special to a page. So home folder point to styles and assets and components that are special to home page in the pages folder.
 
 In **src/pages** there are all pages that in this project we have just one page(index.tsx).
 
