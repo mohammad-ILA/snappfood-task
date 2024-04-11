@@ -8,6 +8,7 @@ import Card from "@/components/common/card";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addVendors } from "@/redux/vendors-slice";
 import { Virtuoso } from "react-virtuoso";
+import CardSkeleton from "@/components/common/card-skeleton";
 export default function Home() {
   const dispatch = useAppDispatch();
   const vendors = useAppSelector((state) => state.vendors.vendors);
@@ -49,20 +50,25 @@ export default function Home() {
           سوپرمارکت‌ها،‌ نانوایی‌ها و ...
         </title>
       </Head>
+
       <section className={styles["cards-section"]}>
-        <Virtuoso
-          data={vendors}
-          endReached={loadMore}
-          increaseViewportBy={200}
-          itemContent={(index, vendor) => {
-            return (
-              <div className={styles["card-container"]}>
-                <Card {...vendor} />
-              </div>
-            );
-          }}
-          components={{ Footer }}
-        />
+        {vendors.length === 0 ? (
+          new Array(6).fill("").map((item, index) => <Footer key={index} />)
+        ) : (
+          <Virtuoso
+            data={vendors}
+            endReached={loadMore}
+            increaseViewportBy={200}
+            itemContent={(index, vendor) => {
+              return (
+                <div className={styles["card-container"]}>
+                  <Card {...vendor} />
+                </div>
+              );
+            }}
+            components={{ Footer }}
+          />
+        )}
       </section>
     </main>
   );
@@ -70,14 +76,8 @@ export default function Home() {
 
 const Footer = () => {
   return (
-    <div
-      style={{
-        padding: "2rem",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      درحال بارگذاری...
+    <div className={styles["card-container"]}>
+      <CardSkeleton />
     </div>
   );
 };
