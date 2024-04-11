@@ -1,8 +1,6 @@
-import * as React from "react";
 import { SvgProps } from "@/components/common/types/index.types";
 
-export default function ProIcon(props: SvgProps) {
-  const { color, height, width } = props;
+const ProIcon: React.FC<SvgProps> = ({ color, height, width }) => {
   return (
     <svg
       width={width || "16"}
@@ -13,7 +11,7 @@ export default function ProIcon(props: SvgProps) {
     >
       <path
         d="M0 3.89211H11.9182C14.1709 3.89211 16 5.73305 16 8.00001C16 10.2674 14.1709 12.1079 11.9186 12.1079H0V3.89211Z"
-        fill={color||'black'}
+        fill={color || "black"}
       ></path>
       <path
         d="M9.69037 5.76833C9.29294 5.76833 8.95307 5.8699 8.67074 6.07305C8.39759 6.27284 8.17865 6.57757 8.01434 6.9868V6.00925C8.01434 5.8762 7.90717 5.76833 7.77497 5.76833H6.45008V9.99123C6.45008 10.1243 6.55726 10.2322 6.68946 10.2322H7.29498C7.73869 10.2322 8.09817 9.87035 8.09817 9.42375V8.64558C8.09817 8.18933 8.20659 7.83801 8.42386 7.59121C8.64405 7.34147 8.95599 7.21639 9.35967 7.21639C9.41847 7.21639 9.51021 7.22269 9.63449 7.23528L9.93266 7.29153V5.82373C9.93266 5.79981 9.91473 5.78008 9.89096 5.77798C9.84759 5.77168 9.78045 5.76833 9.69037 5.76833Z"
@@ -29,4 +27,6 @@ export default function ProIcon(props: SvgProps) {
       ></path>
     </svg>
   );
-}
+};
+
+export default ProIcon;
