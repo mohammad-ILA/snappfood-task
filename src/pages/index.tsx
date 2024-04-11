@@ -1,12 +1,13 @@
 import { getVendorsList } from "@/services/mobile";
 import { GetVendersListApiRequest } from "@/services/mobile/index.types";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import styles from "@/components/home/index.module.sass";
 import useApiCall from "@/components/common/hooks/use-api-call";
 import Card from "@/components/common/card";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addVendors } from "@/redux/vendors-slice";
+import { Virtuoso } from "react-virtuoso";
 export default function Home() {
   const dispatch = useAppDispatch();
   const vendors = useAppSelector((state) => state.vendors.vendors);
@@ -28,15 +29,14 @@ export default function Home() {
       dispatch(
         addVendors(
           data.data.finalResult
-            .filter((v, index) => index !== 0)
+            .filter((v, index) => v.type === "VENDOR")
             .map((vendor) => vendor.data)
         )
       );
   }, [data]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  const loadMore = useCallback(() => {
+    setParam((prevValue) => ({ ...prevValue, page: prevValue.page + 1 }));
+  }, []);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -50,10 +50,34 @@ export default function Home() {
         </title>
       </Head>
       <section className={styles["cards-section"]}>
-        {vendors.map(
-          (vendor, index) => index !== 0 && <Card key={vendor.id} {...vendor} />
-        )}
+        <Virtuoso
+          data={vendors}
+          endReached={loadMore}
+          increaseViewportBy={200}
+          itemContent={(index, vendor) => {
+            return (
+              <div className={styles["card-container"]}>
+                <Card {...vendor} />
+              </div>
+            );
+          }}
+          components={{ Footer }}
+        />
       </section>
     </main>
   );
 }
+
+const Footer = () => {
+  return (
+    <div
+      style={{
+        padding: "2rem",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      درحال بارگذاری...
+    </div>
+  );
+};
