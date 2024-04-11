@@ -26,15 +26,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Project Structure
 
-In **src/components** there are two folders.<br>
-One named common and the other named home. In common folder there are all common components, hooks, functions, common assets like images, fonts, icons, styles and whatever use in the entire of the app.<br>
-On the other and in the home folder or any other folder here except common represent the styles and assets special to a page. So home folder point to styles and assets and components that are special to home page in the pages folder.
+In **src/components** there are two folders. One is named common and the other is named home.<br>
+In the common folder, there are all common components, hooks, functions, and common assets like images, fonts, icons, styles, and whatever use commonly in the entire app.<br>
+On the other hand, the home folder, or any other folder here except the common folder, represents the styles and assets specific to a page. So home folder points to styles assets and components that are specific to the home page in the pages folder. 
 
 In **src/pages** there are all pages that in this project we have just one page(index.tsx).
 
 In **src/redux** there are all our redux/toolkit config and slice and store.
 
-In **src/services** there are config for api and define api urls and their functions and they put in their service folder based on their url.
+In **src/services** there are configs for API and define API URLS and their functions and they put them in their service folder based on their url.
 
 In **src/stories** there are our storybook files to document components.
 
