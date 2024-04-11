@@ -38,9 +38,9 @@ const Card: React.FC<CardProps> = ({
           <div className={styles["card__offer-icon"]}>
             <ProIcon width="21" height="21" color={variables.primaryColor} />
           </div>
-          <div className={styles["card__offer-text"]}>
+          <p className={styles["card__offer-text"]}>
             {convertedBestCouponEnNumbersToFa}
-          </div>
+          </p>
         </div>
       );
     }
@@ -50,7 +50,7 @@ const Card: React.FC<CardProps> = ({
   const renderDiscount = () => {
     if (discountValueForView !== undefined && discountValueForView > 0) {
       return (
-        <div className={styles["card__title-discount"]}>تا {discount}٪</div>
+        <p className={styles["card__title-discount"]}>تا {discount}٪</p>
       );
     }
   };
