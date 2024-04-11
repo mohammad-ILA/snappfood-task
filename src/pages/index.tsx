@@ -1,47 +1,15 @@
-import { getVendorsList } from "@/services/mobile";
-import { GetVendersListApiRequest } from "@/services/mobile/index.types";
 import Head from "next/head";
-import { useCallback, useEffect, useState } from "react";
 import styles from "@/components/home/index.module.sass";
-import useApiCall from "@/components/common/hooks/use-api-call";
-import Card from "@/components/common/card";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addVendors } from "@/redux/vendors-slice";
-import { Virtuoso } from "react-virtuoso";
 import CardSkeleton from "@/components/common/card-skeleton";
+import LoadMoreVirtualized from "@/components/common/virtuoso/components/load-more-virtualized";
+import useLoadVendorsVirtualized from "@/components/common/virtuoso/hooks/use-load-vendors-virtualized";
 export default function Home() {
-  const dispatch = useAppDispatch();
-  const vendors = useAppSelector((state) => state.vendors.vendors);
-  const [param, setParam] = useState<GetVendersListApiRequest>({
-    lat: 35.754,
-    long: 51.328,
-    page: 0,
-    page_size: 10,
-  });
-
-  const { data, isLoading, error, fetchData } = useApiCall(getVendorsList);
-
-  useEffect(() => {
-    fetchData(param);
-  }, [param]);
-
-  useEffect(() => {
-    if (data)
-      dispatch(
-        addVendors(
-          data.data.finalResult
-            .filter((v, index) => v.type === "VENDOR")
-            .map((vendor) => vendor.data)
-        )
-      );
-  }, [data]);
-  const loadMore = useCallback(() => {
-    setParam((prevValue) => ({ ...prevValue, page: prevValue.page + 1 }));
-  }, []);
+  const { error, ...virtualizedProps } = useLoadVendorsVirtualized();
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+
   return (
     <main className={styles.main}>
       <Head>
@@ -50,24 +18,11 @@ export default function Home() {
           سوپرمارکت‌ها،‌ نانوایی‌ها و ...
         </title>
       </Head>
-
       <section className={styles["cards-section"]}>
-        {vendors.length === 0 ? (
+        {virtualizedProps.data.length === 0 ? (
           new Array(6).fill("").map((item, index) => <Footer key={index} />)
         ) : (
-          <Virtuoso
-            data={vendors}
-            endReached={loadMore}
-            increaseViewportBy={200}
-            itemContent={(index, vendor) => {
-              return (
-                <div className={styles["card-container"]}>
-                  <Card {...vendor} />
-                </div>
-              );
-            }}
-            components={{ Footer }}
-          />
+          <LoadMoreVirtualized {...virtualizedProps} />
         )}
       </section>
     </main>
