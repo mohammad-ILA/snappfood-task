@@ -79,7 +79,7 @@ const Card: React.FC<CardProps> = ({
             loader={({ src }) => src}
             fill
             src={backgroundImage}
-            alt=""
+            alt="غذا"
           />
         </div>
         <div className={`${styles.card__logo} ${activeClassLogo}`}>
@@ -88,14 +88,10 @@ const Card: React.FC<CardProps> = ({
             width={48}
             height={48}
             src={logo}
-            alt=""
+            alt="لگو"
             className={styles["card__logo-image"]}
           />
           {renderProIcon()}
-        </div>
-        <div className={styles.card__advertisement}>
-          <div className={styles["card__advertisement-text"]}></div>
-          <div className={styles["card__advertisement-icon"]}></div>
         </div>
         {renderBestCoupon()}
       </header>
@@ -106,9 +102,9 @@ const Card: React.FC<CardProps> = ({
             {renderDiscount()}
           </div>
           <div className={styles.card__rate}>
-            <div className={styles["card__rate-count"]}>({rateCount})</div>
+            <p className={styles["card__rate-count"]}>({rateCount})</p>
             <div className={styles["card__rate-score"]}>
-              <div className={styles["card__rate-score-text"]}>{rateScore}</div>
+              <p className={styles["card__rate-score-text"]}>{rateScore}</p>
               <div className={styles["card__rate-score-icon"]}>
                 <StarIcon
                   width="14"
@@ -119,11 +115,11 @@ const Card: React.FC<CardProps> = ({
             </div>
           </div>
         </div>
-        <div className={styles.card__description}>{description}</div>
+        <p className={styles.card__description}>{description}</p>
         <div className={styles["card__send-duration"]}>
           <div className={styles.card__send}>
-            <div className={styles["card__send-method"]}>{deliveryType}</div>
-            <div className={styles["card__send-price"]}>{deliveryFe}</div>
+            <p className={styles["card__send-method"]}>{deliveryType}</p>
+            <p className={styles["card__send-price"]}>{deliveryFe}</p>
           </div>
         </div>
       </div>
