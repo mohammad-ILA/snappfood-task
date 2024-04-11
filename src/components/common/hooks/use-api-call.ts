@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function useApiCall<T>(queryFn: (...args: any[]) => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
