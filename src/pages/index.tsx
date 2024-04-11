@@ -20,7 +20,11 @@ export default function Home() {
       </Head>
       <section className={styles["cards-section"]}>
         {virtualizedProps.data.length === 0 ? (
-          new Array(6).fill("").map((item, index) => <Footer key={index} />)
+          new Array(6).fill("").map((item, index) => (
+            <div key={index} className={styles["card-container"]}>
+              <CardSkeleton />
+            </div>
+          ))
         ) : (
           <LoadMoreVirtualized {...virtualizedProps} />
         )}
@@ -28,11 +32,3 @@ export default function Home() {
     </main>
   );
 }
-
-const Footer = () => {
-  return (
-    <div className={styles["card-container"]}>
-      <CardSkeleton />
-    </div>
-  );
-};
